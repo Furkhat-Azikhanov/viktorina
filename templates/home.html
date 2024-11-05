@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Погода в вашем городе (по умолчанию Алматы)</h1>
+<form method="get">
+    <input type="text" name="city" placeholder="Введите город">
+    <button type="submit">Показать погоду</button>
+</form>
+
+{% if weather_data %}
+    <table>
+        <tr>
+            <th>Дата</th>
+            <th>Температура (день)</th>
+            <th>Температура (ночь)</th>
+        </tr>
+        {% for day in weather_data %}
+        <tr>
+            <td>{{ day['date'] }}</td>
+            <td>{{ day['day']['maxtemp_c'] }}°C</td>
+            <td>{{ day['day']['mintemp_c'] }}°C</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Не удалось загрузить данные о погоде. Пожалуйста, проверьте город или повторите попытку позже.</p>
+{% endif %}
+{% endblock %}

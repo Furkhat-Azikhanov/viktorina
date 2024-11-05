@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Викторина</h2>
+<p>Текущий счет: {{ session.get('score', 0) }}</p>
+
+{% if incorrect_answer %}
+    <p style="color: red;">Неправильный ответ, попробуйте снова!</p>
+    <form method="GET" action="{{ url_for('quiz') }}">
+        <button type="submit">Продолжить опрос</button>
+    </form>
+{% else %}
+    <form method="POST" action="{{ url_for('quiz') }}">
+        <p>{{ question['question'] }}</p>
+        {% for option in question['options'] %}
+            <input type="radio" id="{{ option }}" name="option" value="{{ option }}" required>
+            <label for="{{ option }}">{{ option }}</label><br>
+        {% endfor %}
+        <button type="submit">Ответить</button>
+    </form>
+{% endif %}
+
+{% endblock %}

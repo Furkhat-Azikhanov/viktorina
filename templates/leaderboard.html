@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Таблица лидеров</h2>
+<table>
+    <tr>
+        <th>Имя</th>
+        <th>Счет</th>
+    </tr>
+    {% for leader in leaders %}
+    <tr>
+        <td>{{ leader.display_name }}</td>
+        <td>{{ leader.score }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
